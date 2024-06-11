@@ -14,6 +14,7 @@ let users = [
         name: "juan1",
         last_name: "perez",
         email: "junperez@mail.com",
+        
         password: "123456",
     },
     {
