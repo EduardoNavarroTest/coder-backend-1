@@ -39,13 +39,45 @@ router.get("/:pid", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         const newProduct = req.body;
-        const { title, description, code, price, stock, category, thumbnails } = newProduct;
-        await productManager.addProduct(title, description, code, price, stock, thumbnails, category);
+        await productManager.addProduct(newProduct);
         res.status(201).json({
             message: "Product successfully added"
         });
     } catch (e) {
         console.error("Error adding product", e);
+        res.status(500).json({
+            e: "Server Error"
+        });
+    }
+});
+
+router.put("/:pid", async (req, res) => {
+    const id = req.params.pid;
+    const productUpdate = req.body;
+
+    try {
+        await productManager.updateProduct(parseInt(id), productUpdate);
+        res.json({
+            message: "Product successfully update"
+        });
+    } catch (e) {
+        console.error("Error update product", e);
+        res.status(500).json({
+            e: "Server Error"
+        });
+    }
+});
+
+router.delete("/:pid", async (req, res) => {
+    const id = req.params.pid;
+
+    try {
+        await productManager.deleteProduct(parseInt(id));
+        res.json({
+            message: "Product successfully delete"
+        });
+    } catch (e) {
+        console.error("Error delete product", e);
         res.status(500).json({
             e: "Server Error"
         });
@@ -71,23 +103,6 @@ router.post("/", async (req, res) => {
 
 
 
-
-
-
-router.post("/", (req, res) => {
-    console.log(req.body)
-    const name = req.body.name;
-    const last_name = req.body.last_name;
-    const email = req.body.email;
-
-    if (!name || !last_name || !email) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios" })
-    }
-
-    let id = users[users.length - 1].id + 1;
-    users.push({ id, name, last_name, email });
-    res.status(201).json({ id })
-});
 
 router.put("/:id", (req, res) => {
     const id = req.params.id;

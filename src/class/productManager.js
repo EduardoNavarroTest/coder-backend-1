@@ -1,10 +1,11 @@
+import { json } from "express";
 import fs from "fs";
 
 
 class ProductManager {
     constructor(path) {
         this.products = [];
-        this.path = path
+        this.path = path;
     }
 
     addProduct = async ({ title, description, code, price, stock, thumbnails, category }) => {
@@ -13,7 +14,7 @@ class ProductManager {
         const status = true;
 
         // Controlar que todos los campos existan
-        if (![title, description, code, price, stock, category].every(Boolean)) {
+        if (!title || !description || !code || !price || !stock || !category || !thumbnails) {
             console.log(`All fields are required`);
             return;
         }
@@ -25,7 +26,8 @@ class ProductManager {
         }
 
         //Agregar al array
-        const newProduct = { id: this.generateId(), title, description, price, thumbnails, code, stock, status, category }
+        const id = await this.generateId();
+        const newProduct = { id, title, description, price, thumbnails, code, stock, status, category }
         arrProducts.push(newProduct);
 
         //Guardar en el archivo
@@ -43,18 +45,20 @@ class ProductManager {
         return products.find(product => product.id === parseInt(id)) || `Not Found`;
     }
 
-    generateId = () => {
-        const maxId = this.products.reduce((max, product) => {
+    generateId = async () => {
+        const arrProducts = await this.readFile();
+        const maxId = arrProducts.reduce((max, product) => {
             return product.id > max ? product.id : max;
         }, 0);
         return maxId + 1;
     }
 
-    updateProduct = async (id) => {
+    updateProduct = async (id, productUpdate) => {
         try {
             const arrProducts = await this.readFile();
 
             const index = arrProducts.findIndex(item => item.id === id);
+            console.log('el index es:' + index)
 
             if (index !== -1) {
                 arrProducts[index] = { ...arrProducts[index], ...productUpdate };
@@ -66,12 +70,11 @@ class ProductManager {
         } catch (e) {
             console.log("Error: ", e);
         }
-
     }
 
-    deleteProduct = (id) => {
-        const arr = this.products.filter(product => product.id !== id);
-        this.products = arr;
+    deleteProduct = async (id) => {
+        const arrProducts = await this.readFile();
+        const arr = arrProducts.filter(product => product.id !== id);
         this.saveFile(arr);
     }
 

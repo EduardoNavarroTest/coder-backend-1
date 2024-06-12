@@ -1,21 +1,8 @@
 [
   {
-    "title": "Azúcar",
-    "description": "Blanca",
-    "price": "2000",
-    "img": "Sin Imagen",
-    "code": "abc127",
-    "stock": "100",
-    "category": "Almacén",
-    "status": true,
-    "thumbnails": [],
-    "id": 1
-  },
-  {
     "title": "Sal",
     "description": "De mesa",
     "price": "1000",
-    "img": "Sin Imagen",
     "code": "abc128",
     "stock": "200",
     "category": "Almacén",
@@ -24,34 +11,25 @@
     "id": 2
   },
   {
-    "title": "Aceite",
-    "description": "Vegetal",
-    "price": "3000",
-    "code": "abc129",
-    "stock": "120",
-    "category": "Almacén",
+    "id": 3,
+    "title": "Sal X",
+    "description": "De mesa X",
+    "price": "20001",
+    "thumbnails": [],
+    "code": "2",
+    "stock": "1001",
     "status": true,
-    "thumbnails": [],
-    "id": 3
+    "category": "AlmacénX"
   },
   {
-    "id": 1,
-    "title": "Aguacate",
-    "description": "Hans",
-    "price": "2000",
+    "id": 4,
+    "title": "Azuquita X",
+    "description": "De mesa X",
+    "price": "20001",
     "thumbnails": [],
-    "code": "abc130",
-    "stock": "150",
-    "status": true
-  },
-  {
-    "id": 1,
-    "title": "Aguacate",
-    "description": "Hans",
-    "price": "2000",
-    "thumbnails": [],
-    "code": "abc1300",
-    "stock": "150",
-    "status": true
+    "code": "3",
+    "stock": "1001",
+    "status": true,
+    "category": "AlmacénX"
   }
 ]
