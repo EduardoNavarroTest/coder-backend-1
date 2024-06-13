@@ -31,5 +31,16 @@
     "stock": "1001",
     "status": true,
     "category": "AlmacénX"
+  },
+  {
+    "id": 5,
+    "title": "Palmitos",
+    "description": "¿Quien compra esto?",
+    "price": "5500",
+    "thumbnails": [],
+    "code": "abc126",
+    "stock": "150",
+    "status": true,
+    "category": "Almacen"
   }
 ]

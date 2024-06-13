@@ -6,35 +6,53 @@ class CartManager {
         this.path = path;
     }
 
-    addCart = async ({ product, quantity }) => {
-
+    createCart = async () => {
         const arrCart = await this.readFile();
+        const id = await this.generateId();
+        const newCart = { id, products: [] };
+        arrCart.push(newCart)
+        await this.saveFile(arrCart);
+    }
+
+    addCart = async (cartId, productId, quantity) => {
 
         // Controlar que todos los campos existan
-        if (!product || !quantity) {
+        if (!cartId || !productId || !quantity) {
             console.log(`All fields are required`);
             return;
         }
 
-        const newProduct = arrCart.find(item => item.product === product);
-        const id = await this.generateId();
-        newProduct ? productInCart.quantity +=1 : arrCart.push({id, newProduct});
+        const arrCart = await this.readFile();
+        const cart = arrCart.find(item => item.id === parseInt(cartId));
+        
+        if (!cart) {
+            console.log(`Cart not found`);
+            return;
+        }
+        
+        const existsProduct = cart.products.find(item => item.product === parseInt(productId));
+        console.log(existsProduct)     
 
-    
+        existsProduct ? existsProduct.quantity += quantity : cart.products.push({product: parseInt(productId), quantity})
+
         //Guardar en el archivo
         await this.saveFile(arrCart)
 
     }
 
+    getCarts = async () => {
+        return await this.readFile();
+    }
+
     getCartById = async (id) => {
         const cart = await this.readFile();
-        return cart.find(item => item.id === parseInt(id)) || `Not Found`;
+        return cart.find(item => item.id === parseInt(id));
     }
 
     generateId = async () => {
-        const arrProducts = await this.readFile();
-        const maxId = arrProducts.reduce((max, product) => {
-            return product.id > max ? product.id : max;
+        const arrCarts = await this.readFile();
+        const maxId = arrCarts.reduce((max, cart) => {
+            return cart.id > max ? cart.id : max;
         }, 0);
         return maxId + 1;
     }
