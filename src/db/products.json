@@ -1,16 +1,5 @@
 [
   {
-    "title": "Sal",
-    "description": "De mesa",
-    "price": "1000",
-    "code": "abc128",
-    "stock": "200",
-    "category": "Almacén",
-    "status": true,
-    "thumbnails": [],
-    "id": 2
-  },
-  {
     "id": 3,
     "title": "Sal X",
     "description": "De mesa X",
@@ -34,13 +23,24 @@
   },
   {
     "id": 5,
-    "title": "Palmitos",
-    "description": "¿Quien compra esto?",
-    "price": "5500",
-    "thumbnails": [],
-    "code": "abc126",
+    "title": "Arroz",
+    "description": "De la casa",
+    "price": "151",
+    "thumbnails": "Sin Imagen",
+    "code": "GYV001",
     "stock": "150",
     "status": true,
-    "category": "Almacen"
+    "category": "Comestible"
+  },
+  {
+    "id": 6,
+    "title": "Manteca",
+    "description": "De la casa",
+    "price": "151",
+    "thumbnails": "Sin Imagen",
+    "code": "GYV002",
+    "stock": "150",
+    "status": true,
+    "category": "Comestible"
   }
 ]

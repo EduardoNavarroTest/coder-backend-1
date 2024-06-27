@@ -1,4 +1,92 @@
-h1 {
+h2, h1 {
     text-align: center;
-    background-color: red;
 }
+/* Estilo para el contenedor de productos */
+#contenedorProductos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+/* Estilo para las tarjetas de productos */
+.card {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 200px;
+    text-align: center;
+}
+
+/* Estilo para el texto dentro de las tarjetas */
+.card p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo para el botón */
+.card button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo para el botón al pasar el ratón por encima */
+.card button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+/* Estilo para los campos de entrada */
+form input,
+form select,
+form button {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Estilo específico para el botón */
+form button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo para el botón al pasar el ratón por encima */
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el campo de selección */
+form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
