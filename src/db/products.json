@@ -42,5 +42,16 @@
     "stock": "150",
     "status": true,
     "category": "Comestible"
+  },
+  {
+    "id": 7,
+    "title": "Guayaba",
+    "description": "Dulce",
+    "price": "500",
+    "thumbnails": "Sin Imagen",
+    "code": "GRL001",
+    "stock": "15",
+    "status": true,
+    "category": "Frutas"
   }
 ]
