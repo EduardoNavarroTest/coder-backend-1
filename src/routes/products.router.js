@@ -1,9 +1,9 @@
 import express from "express";
-import ProductManager from "../class/productManager.js";
+import ProductManager from "../dao/db/productManagerDb.js";
 const router = express.Router();
 
 
-const productManager = new ProductManager("./src/db/products.json");
+const productManager = new ProductManager();
 
 
 router.get("/", async (req, res) => {
@@ -56,7 +56,7 @@ router.put("/:pid", async (req, res) => {
     const productUpdate = req.body;
 
     try {
-        await productManager.updateProduct(parseInt(id), productUpdate);
+        await productManager.updateProduct(id, productUpdate);
         res.json({
             message: "Product successfully update"
         });
@@ -72,7 +72,7 @@ router.delete("/:pid", async (req, res) => {
     const id = req.params.pid;
 
     try {
-        await productManager.deleteProduct(parseInt(id));
+        await productManager.deleteProduct(id);
         res.json({
             message: "Product successfully delete"
         });

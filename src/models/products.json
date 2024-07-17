@@ -1,6 +1,5 @@
 [
   {
-    "id": 3,
     "title": "Sal X",
     "description": "De mesa X",
     "price": "20001",
@@ -11,7 +10,6 @@
     "category": "AlmacénX"
   },
   {
-    "id": 4,
     "title": "Azuquita X",
     "description": "De mesa X",
     "price": "20001",
@@ -22,7 +20,6 @@
     "category": "AlmacénX"
   },
   {
-    "id": 5,
     "title": "Arroz",
     "description": "De la casa",
     "price": "151",
@@ -33,7 +30,6 @@
     "category": "Comestible"
   },
   {
-    "id": 6,
     "title": "Manteca",
     "description": "De la casa",
     "price": "151",
@@ -44,7 +40,6 @@
     "category": "Comestible"
   },
   {
-    "id": 7,
     "title": "Guayaba",
     "description": "Dulce",
     "price": "500",

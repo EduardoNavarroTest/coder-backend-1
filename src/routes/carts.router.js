@@ -1,9 +1,9 @@
 import express from "express";
-import CartManager from "../class/cartManager.js";
+import CartManager from "../dao/db/cartManagerDb.js";
 const router = express.Router();
 
 
-const cartManager = new CartManager("./src/db/cart.json");
+const cartManager = new CartManager();
 
 router.get("/", async (req, res) => {
     try {

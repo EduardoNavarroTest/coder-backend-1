@@ -4,11 +4,12 @@ import { Server } from "socket.io";
 import cartsRouter from "./routes/carts.router.js"
 import productsRouter from "./routes/products.router.js"
 import viewsRouter from "./routes/views.router.js";
-import ProductManager from "./class/productManager.js";
+import ProductManager from "./dao/db/productManagerDb.js";
+import "./database.js";
 
 const PORT = 8080;
 const app = express();
-const productManager = new ProductManager("./src/db/products.json");
+const productManager = new ProductManager();
 //Listener
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando en el http://localhost:${PORT}`);
@@ -53,27 +54,4 @@ io.on("connection", async (socket) => {
 });
 
 
-/* Adicional
-
-app.use(express.static("./src/public"));
-
-import multer from "multer";
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "src/public/img")
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    }
-})
-
-const upload = multer({ storage });
-
-app.post("/upload", upload.single("imagenclave"), (req, res) => {
-    res.send("upload");
-})
-
-*/
-
-//Voy por minuto 21:19
+//Voy por el minuto 20
