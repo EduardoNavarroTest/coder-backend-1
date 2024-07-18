@@ -54,4 +54,3 @@ io.on("connection", async (socket) => {
 });
 
 
-//Voy por el minuto 20

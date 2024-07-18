@@ -26,7 +26,7 @@ class CartManager {
             if (existsProduct) {
                 existsProduct.quantity += quantity;
             } else {
-                cart.product.push({ product: productId, quantity })
+                cart.products.push({ product: productId, quantity })
             }
 
             cart.markModified("products");
@@ -46,8 +46,12 @@ class CartManager {
     }
 
     getCartById = async (id) => {
-        const cart = await CartModel.findById(id);
-        return cart || `Cart Not Found`;
+        try {
+            const cart = await CartModel.findById(id);
+            return cart || `Cart Not Found`;
+        } catch (error) {
+            console.log("Error find cart: " + error)
+        }
     }
 
 }

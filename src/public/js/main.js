@@ -12,7 +12,7 @@ const renderProductos = (data) => {
         const card = document.createElement("div");
 
         card.innerHTML = `<div class="card">
-                <p> Id: <strong>${element.id}</strong></p>
+                <p> Id: <strong>${element._id}</strong></p>
                 <p> Product: <strong>${element.title}</strong></p>
                 <p> Price: <strong>$${element.price}</strong></p>
                 <button>Delete</button>
@@ -21,13 +21,14 @@ const renderProductos = (data) => {
 
         contenedorProductos.appendChild(card);
         card.querySelector("button").addEventListener("click", () => {
-            deleteProducts(element.id);
+            deleteProducts(element._id);
+            console.log(" hoa " + element._id)
         })
     });
 
 }
 
-const deleteProducts = id => {
+const deleteProducts = (id) => {
     socket.emit("eliminarProducto", id);
 };
 
