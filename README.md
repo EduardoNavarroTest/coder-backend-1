@@ -1,3 +1,3 @@
-## Profe, aún me encuentro pushenado
+## Profe, aún me encuentro pusheando
 ## Por favor, vuelva mañana :)
 ## Graciassss
