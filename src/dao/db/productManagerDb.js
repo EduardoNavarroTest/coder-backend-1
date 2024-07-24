@@ -26,9 +26,69 @@ class ProductManager {
         await newProduct.save();
     }
 
-    getProducts = async () => {
-        const arrProducts = await ProductModel.find();
-        return arrProducts;
+    getProducts = async ({ limit = 10, page = 1, query, sort } = {}) => {
+        try {
+            const skip = (page - 1) * limit;
+    
+            let queryOptions = {};
+    
+            if (query) {
+                queryOptions = { category: query };
+            }
+    
+            const sortOptions = {};
+            if (sort) {
+                if (sort === 'asc' || sort === 'desc') {
+                    sortOptions.price = sort === 'asc' ? 1 : -1;
+                }
+            }
+    
+            const productos = await ProductModel
+                .find(queryOptions)
+                .sort(sortOptions)
+                .skip(skip)
+                .limit(limit);
+    
+            const totalProducts = await ProductModel.countDocuments(queryOptions);
+    
+            const totalPages = Math.ceil(totalProducts / limit);
+            const hasPrevPage = page > 1;
+            const hasNextPage = page < totalPages;
+    
+            let stringPrevLink = `/api/products?limit=${limit}&page=${page - 1}`;
+            if (sort) {
+                stringPrevLink += `&sort=${sort}`;
+            }
+            if (query) {
+                stringPrevLink += `&query=${query}`;
+            }
+    
+            let stringNextLink = `/api/products?limit=${limit}&page=${page + 1}`;
+            if (sort) {
+                stringNextLink += `&sort=${sort}`;
+            }
+            if (query) {
+                stringNextLink += `&query=${query}`;
+            }
+    
+            const prevLink = hasPrevPage ? stringPrevLink : null;
+            const nextLink = hasNextPage ? stringNextLink : null;
+    
+            return {
+                docs: productos,
+                totalPages,
+                prevPage: hasPrevPage ? page - 1 : null,
+                nextPage: hasNextPage ? page + 1 : null,
+                page,
+                hasPrevPage,
+                hasNextPage,
+                prevLink: prevLink,
+                nextLink: nextLink
+            };
+        } catch (e) {
+            console.log("Error getting products", e);
+            throw e;  
+        }
     }
 
     getProductById = async (id) => {

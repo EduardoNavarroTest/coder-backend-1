@@ -8,10 +8,27 @@ const productManager = new ProductManager();
 
 router.get("/", async (req, res) => {
     try {
-        const limit = req.query.limit;
-        const products = await productManager.getProducts();
+        const { limit = 10, page = 1, sort, query } = req.query;
+        const productos = await productManager.getProducts({
+            limit: parseInt(limit),
+            page: parseInt(page),
+            sort,
+            query,
+        });
 
-        limit ? res.json(products.slice(0, limit)) : res.json(products);
+
+        res.json({
+            status: 'success',
+            payload: productos,
+            totalPages: productos.totalPages,
+            prevPage: productos.prevPage,
+            nextPage: productos.nextPage,
+            page: productos.page,
+            hasPrevPage: productos.hasPrevPage,
+            hasNextPage: productos.hasNextPage,
+            prevLink: productos.prevLink,
+            nextLink: productos.nextLink
+        });
 
     } catch (e) {
         console.error("Error recovering the products", e);
