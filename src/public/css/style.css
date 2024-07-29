@@ -1,4 +1,5 @@
-h1, h2 {
+h1,
+h2 {
     text-align: center;
     color: #333;
     margin-top: 20px;
@@ -131,6 +132,63 @@ body {
 }
 
 /* Estilo para el botón al pasar el ratón por encima */
-.product-card button:hover {
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
     background-color: #0056b3;
+}
+
+.page-info {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+.carrito-item {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* Estilo para los textos dentro de los elementos del carrito */
+.carrito-item p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo para el contenedor del carrito */
+#carritoContenedor {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    background-color: #f4f4f4;
 }

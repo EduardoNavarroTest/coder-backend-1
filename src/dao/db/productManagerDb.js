@@ -26,54 +26,55 @@ class ProductManager {
         await newProduct.save();
     }
 
-    getProducts = async ({ limit = 10, page = 1, query, sort } = {}) => {
+    getProducts = async ({ limit = 10, page = 1, sort, query } = {}) => {
         try {
             const skip = (page - 1) * limit;
-    
+
             let queryOptions = {};
-    
+
             if (query) {
                 queryOptions = { category: query };
             }
-    
+
+
             const sortOptions = {};
             if (sort) {
                 if (sort === 'asc' || sort === 'desc') {
                     sortOptions.price = sort === 'asc' ? 1 : -1;
                 }
             }
-    
+
             const productos = await ProductModel
                 .find(queryOptions)
                 .sort(sortOptions)
                 .skip(skip)
                 .limit(limit);
-    
+
             const totalProducts = await ProductModel.countDocuments(queryOptions);
-    
+
             const totalPages = Math.ceil(totalProducts / limit);
             const hasPrevPage = page > 1;
             const hasNextPage = page < totalPages;
-    
-            let stringPrevLink = `/api/products?limit=${limit}&page=${page - 1}`;
+
+            let stringPrevLink = `/products?limit=${limit}&page=${page - 1}`;
             if (sort) {
                 stringPrevLink += `&sort=${sort}`;
             }
             if (query) {
                 stringPrevLink += `&query=${query}`;
             }
-    
-            let stringNextLink = `/api/products?limit=${limit}&page=${page + 1}`;
+
+            let stringNextLink = `/products?limit=${limit}&page=${page + 1}`;
             if (sort) {
                 stringNextLink += `&sort=${sort}`;
             }
             if (query) {
                 stringNextLink += `&query=${query}`;
             }
-    
+
             const prevLink = hasPrevPage ? stringPrevLink : null;
             const nextLink = hasNextPage ? stringNextLink : null;
-    
+
             return {
                 docs: productos,
                 totalPages,
@@ -82,12 +83,14 @@ class ProductManager {
                 page,
                 hasPrevPage,
                 hasNextPage,
-                prevLink: prevLink,
-                nextLink: nextLink
+                prevLink: hasPrevPage ? `/api${prevLink}` : null,
+                nextLink: hasNextPage ? `/api${nextLink}` : null,
+                prevLinkView: prevLink,
+                nextLinkView: nextLink
             };
         } catch (e) {
             console.log("Error getting products", e);
-            throw e;  
+            throw e;
         }
     }
 

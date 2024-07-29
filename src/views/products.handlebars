@@ -6,16 +6,21 @@
         <p>{{this.description}}</p>
         <p>Category: <strong>{{this.category}}</strong></p>
         <p>Price: <strong>{{this.price}}</strong></p>
+        <button>Add to cart</button>
     </div>
     {{/each}}
 </div>
 
+<div class="container">
+    <div class="pagination">
+        {{#if hasPrevPage}}
+        <a href="{{prevLinkView}}"> Prev </a>
+        {{/if}}
 
-{{#if hasNextPage}}
-    <a href="/products?page={{nextPage}}"> Next </a>
-{{/if}} 
-{{#if hasPrevPage}}
-    <a href="/products?page={{prevPage}}"> Prev </a>
-{{/if}}
+        {{#if hasNextPage}}
+        <a href="{{nextLinkView}}"> Next </a>
+        {{/if}}
+    </div>
 
-<p>Page {{currentPage}} of {{totalPages}} </p>
+    <p class="page-info">Page {{currentPage}} of {{totalPages}}</p>
+</div>
