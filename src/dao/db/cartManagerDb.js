@@ -21,7 +21,7 @@ class CartManager {
 
         try {
             const cart = await this.getCartById(cartId);
-            const existsProduct = cart.products.find(item => item.product.toString() === productId);
+            const existsProduct = cart.products.find(item => item.product._id.toString() === productId);
 
             if (existsProduct) {
                 existsProduct.quantity += quantity;

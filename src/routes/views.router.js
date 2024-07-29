@@ -89,7 +89,7 @@ router.get("/carts/:cid", async (req, res) => {
        }));
 
 
-      res.render("carts", { productos: productsInCart });
+      res.render("carts", { products: productsInCart });
    } catch (error) {
       console.error("Error getting cart", error);
       res.status(500).json({ error: "Internal Error Server" });
