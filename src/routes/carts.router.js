@@ -66,4 +66,20 @@ router.post("/:cid/product/:pid", async (req, res) => {
     }
 });
 
+router.delete("/:cid/product/:pid", async (req, res) => {
+    const cid = req.params.cid;
+    const pid = req.params.pid;
+    try {
+        await cartManager.removeProductCart(cid, pid);
+        res.status(201).json({
+            message: "Product remove successfully"
+        });
+    } catch (e) {
+        console.error("Error remove product on cart", e);
+        res.status(500).json({
+            e: "Server Error"
+        });
+    }
+});
+
 export default router;

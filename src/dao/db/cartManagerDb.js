@@ -54,6 +54,33 @@ class CartManager {
         }
     }
 
+    removeProductCart = async (cid, pid) => {
+        try {
+            const cart = await CartModel.findById(cid);
+            if (!cart) {
+                return 'Cart Not Found';
+            }
+
+            // Encuentra el índice del producto en el array de productos del carrito
+            const productIndex = cart.products.findIndex(product => product.product._id.toString() === pid);
+
+
+            // Si el producto no se encuentra, devuelve un mensaje
+            if (productIndex === -1) {
+                return 'Product Not Found in Cart';
+            }
+
+            // Elimina el producto del array de productos
+            cart.products.splice(productIndex, 1);
+
+            // Guarda los cambios en la base de datos
+            await cart.save();
+
+            return cart;
+        } catch (error) {
+            console.log("Error find product in cart: " + error);
+        }
+    }
 }
 
 export default CartManager;
