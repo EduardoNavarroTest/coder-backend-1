@@ -1,7 +1,6 @@
 import CartModel from "../fs/data/cart.model.js";
 
 class CartManager {
-
     createCart = async () => {
         try {
             const newCart = new CartModel({ products: [] });
@@ -10,7 +9,7 @@ class CartManager {
         } catch (error) {
             console.log(`Error: ${error}`);
         }
-    }
+    };
 
     addCart = async (cartId, productId, quantity) => {
         // Controlar que todos los campos existan
@@ -21,53 +20,53 @@ class CartManager {
 
         try {
             const cart = await this.getCartById(cartId);
-            const existsProduct = cart.products.find(item => item.product._id.toString() === productId);
+            const existsProduct = cart.products.find(
+                (item) => item.product._id.toString() === productId
+            );
 
             if (existsProduct) {
                 existsProduct.quantity += quantity;
             } else {
-                cart.products.push({ product: productId, quantity })
+                cart.products.push({ product: productId, quantity });
             }
 
             cart.markModified("products");
-            await cart.save()
+            await cart.save();
             return cart;
-
         } catch (error) {
-            console.log(`Error: ${error}`)
+            console.log(`Error: ${error}`);
         }
-
-
-    }
+    };
 
     getCarts = async () => {
         const cart = await CartModel.find();
         return cart || `Carts Not Found`;
-    }
+    };
 
     getCartById = async (id) => {
         try {
             const cart = await CartModel.findById(id);
             return cart || `Cart Not Found`;
         } catch (error) {
-            console.log("Error find cart: " + error)
+            console.log("Error find cart: " + error);
         }
-    }
+    };
 
     removeProductCart = async (cid, pid) => {
         try {
             const cart = await CartModel.findById(cid);
             if (!cart) {
-                return 'Cart Not Found';
+                return "Cart Not Found";
             }
 
             // Encuentra el índice del producto en el array de productos del carrito
-            const productIndex = cart.products.findIndex(product => product.product._id.toString() === pid);
-
+            const productIndex = cart.products.findIndex(
+                (product) => product.product._id.toString() === pid
+            );
 
             // Si el producto no se encuentra, devuelve un mensaje
             if (productIndex === -1) {
-                return 'Product Not Found in Cart';
+                return "Product Not Found in Cart";
             }
 
             // Elimina el producto del array de productos
@@ -80,7 +79,62 @@ class CartManager {
         } catch (error) {
             console.log("Error find product in cart: " + error);
         }
-    }
+    };
+
+    updateQuantityProductCart = async (cid, pid, quantity) => {
+        try {
+            const cart = await this.getCartById(cid);
+            const existsProduct = cart.products.find(
+                (item) => item.product._id.toString() === pid
+            );
+
+            if (existsProduct) {
+                existsProduct.quantity = quantity;
+            } else {
+                console.log("Product does not exist in the cart");
+                return "Product does not exist in the cart";
+            }
+
+            cart.markModified("products");
+            await cart.save();
+            return cart;
+        } catch (error) {
+            console.log(`Error: ${error}`);
+        }
+    };
+
+    cleanCart = async (cid) => {
+        try {
+            const cart = await this.getCartById(cid);
+
+            if (cart) {
+                cart.products = [];
+            } else {
+                console.log("Cart not exists");
+                return "Cart not exists";
+            }
+            await cart.save();
+        } catch (error) {
+            console.log(`Error: ${error}`);
+        }
+    };
+
+    updateProductsCart = async (cid, products) => {
+        try {
+            const cart = await this.getCartById(cid);
+
+            if (cart) {
+                cart.products = products;
+            } else {
+                console.log("Cart not exists");
+                return "Cart not exists";
+            }
+            await cart.save();
+            console.log("Products update in the Cart");
+        } catch (error) {
+            console.log(`Error: ${error}`);
+        }
+    };
 }
 
 export default CartManager;
